@@ -1,25 +1,38 @@
+<?php
+    session_start();
+    require_once("core/db_connect.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
+<a href="./CreateAccount.php">Create an account</a>
+<a href="./Login.php">Go to login page</a>
+<a href="./account/logout.php">Log out</a>
 
+<?php 
+    $nummer1 = new Turnering("hej", "H"); 
+    opret_post($nummer1);
 
-<?php
-   // session_start();
-    //require_once("core/db_connect.php");
+   
+    function opret_post($opslag){
+        $opslag = serialize($opslag);
+        $opslag = base64_encode($opslag);
+        global $db;
+        $insertSQL = "insert into information (opslag)
+        values ('$opslag')";
 
-    
-
-/*
-    function opret_post(){
-
-        $insertSQL = "insert into information ($post)
-        values ('$post')";
-
-        mysqli_query($conn, $insertSQL);
+        mysqli_query($db, $insertSQL);
 
     }
 
-*/
+    $sqli = 'SELECT * FROM information WHERE id = 3';
+    $result = mysqli_query($db, $sqli);
+    $res = mysqli_fetch_array ($result,MYSQLI_ASSOC);
+
+    $opslag1 = base64_decode($res['opslag']);
+    $opslag2 = unserialize($opslag1);
+    $opslag2->display();
     
 
     class Information {
@@ -32,8 +45,8 @@
         function __construct($titel, $tekst) {
             $this->titel = $titel;
             $this->tekst = $tekst;
-            //$dato = date('m/d/Y h:i:s a');
-            echo("construct test");
+            $this->dato = date('m/d/Y h:i:s a');
+            //echo("construct test overklasse");
             
         }
 
@@ -44,17 +57,51 @@
 
     class Turnering extends Information {
 
-       function __contruct(){
-        parent::__construct();
-       }
+        function __contruct(){
+            parent::__construct();
+        }
 
         function display() {
-            echo($this->titel);
+            echo("titel: {$this->titel} \n tekst: {$this->tekst}");
         }
     }
 
-    $nummer1 = new Turnering("hej", "HEJHEJ"); 
-    $nummer1->display();
+    class Event extends Information {
+        function __contruct(){
+            parent::__construct();
+        }
+ 
+        function display() {
+            echo("titel: {$this->titel} \n tekst: {$this->titel}");
+        }
+    }
+
+    class Træner_information extends Information {
+        function __contruct(){
+            parent::__construct();
+        }
+ 
+        function display() {
+            if($_SESSION['role']>=1){
+                echo("titel: {$this->titel} \n tekst: {$this->titel}");
+                
+
+
+
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+    
 ?>
 
 </body>
