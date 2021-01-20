@@ -1,0 +1,63 @@
+<<<<<<< Updated upstream
+=======
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    width: 20%;
+}
+
+.login-birthday-container {
+    display: flex;
+    flex-direction: row;
+    width: 5%;
+}
+
+.button-signup {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.opslagsbox {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+    margin: 50px auto;
+    background-color: rgba(138, 138, 138, 0.705);
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    z-index: 3;
+    position: relative;
+    display: inline-block;
+    font-size: 11px;
+}
+
+.titel {
+    font-weight: normal;
+    font-size: 30px;
+    text-decoration-line: underline;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+.tekst {
+    display: block;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+
+}
+>>>>>>> Stashed changes
