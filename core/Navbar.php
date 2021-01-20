@@ -29,8 +29,16 @@
                 <li class="nav-item">
                     <a class="navbar-link" href='./Booking.php'>Booking</a>
                 </li>
-                
                 <?php
+                if(isset($_SESSION['role'])){
+                    if($_SESSION['role'] == 2){
+                        ?>
+                        <li class="nav-item">
+                            <a class="navbar-link" href='./AssignRoles.php'>Assign Roles</a>
+                        </li>
+                        <?php
+                    }
+                }
             }
             ?>
         </ul>
