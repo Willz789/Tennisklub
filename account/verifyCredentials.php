@@ -6,6 +6,8 @@
 
     function verify(){
 
+        global $db;
+
         $username = mysqli_real_escape_string($db, $_POST['username']);
         $password = mysqli_real_escape_string($db, $_POST['password']);
 
@@ -13,19 +15,20 @@
         $result = mysqli_query($db, $selectSQL);
         if(!$result){
             die(json_encode(array(
-                'result' => 2;
+                'result' => 2,
             )));
         }
         else if(mysqli_num_rows($result) == 0){
             die(json_encode(array(
-                'result' => 1;
+                'result' => 1,
             )));
         }
         else {
-            $row = mysqli_fetch_assic($result);
+            $row = mysqli_fetch_assoc($result);
+
             if(!password_verify($password, $row['password_hash'])){
                 die(json_encode(array(
-                    'result' => 1;
+                    'result' => 1,
                 )));
             }
 
@@ -39,7 +42,7 @@
             $_SESSION['birthday'] = $row['birthday'];
 
             die(json_encode(array(
-                'result' => 0;
+                'result' => 0,
             )));
         }
 

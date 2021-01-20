@@ -4,7 +4,7 @@
     session_start();
 ?>
 <head>
-<link rel="stylesheet" href="./style/Stylesheet.css">
+	<link rel="stylesheet" href="./style/Stylesheet.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
@@ -17,7 +17,7 @@
 <main>
 	<div id="msg"></div>
 	
-	<div id="login_form">
+	<div id="login-form">
 		<h1> Login </h1>
 		<input type="text" id="username" placeholder = "Username" required>
 		<input type="password" id="password" placeholder = "Password" required>
