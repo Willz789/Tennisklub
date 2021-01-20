@@ -13,7 +13,7 @@
 	<script src="./account/login.js" defer></script>
 </head>
 <body>
-
+<?php include("./core/Navbar.php"); ?>
 <main>
 	<div id="msg"></div>
 	
