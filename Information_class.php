@@ -42,8 +42,8 @@ function gem_opslag($opslag){
                     {
                         $imageSource = "./images/" . $this->imagePath;
                         
-                        echo("<div id=\"forum-post-image\">
-                            <img src=\"{$imageSource}\" id=\"post-image\" style=\"\"
+                        echo("<div class=\"forum-post-image\">
+                            <img src=\"{$imageSource}\" class=\"post-image\" >
                         </div>");
                     }
 
