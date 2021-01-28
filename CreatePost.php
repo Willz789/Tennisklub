@@ -52,7 +52,7 @@
                 if($newImagePath != ""){
                     $uniqueImagePath = (string) rand(0,10000000);
                     $uniqueImagePath .= $newImagePath;
-                    while(checkIfPathExists($uniqueImagePath, $result) == true){
+                    while(pathExists($uniqueImagePath, $result) == true){
                         $uniqueImagePath = (string) rand();
                         $uniqueImagePath .= $newImagePath;
                     }
@@ -75,7 +75,7 @@
             }
         }
 
-        function checkIfPathExists($newPath, $result){
+        function pathExists($newPath, $result){
             while($row = mysqli_fetch_array($result)){
                 extract($row);
                 $opslag1 = base64_decode($row['opslag']);

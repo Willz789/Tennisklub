@@ -21,12 +21,3 @@
 
     </body>
 </html>
-
-
-
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes

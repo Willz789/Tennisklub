@@ -5,9 +5,9 @@ $(document).ready(function(){
         let username = $("#username").val().trim();
         let phonenumber = $("#phonenumber").val().trim();
         let mail = $("#mail").val().trim();
-        let birthDay = $("#birthDay").val().trim();
-        let birthMonth = $("#birthMonth").val().trim();
-        let birthYear = $("#birthYear").val().trim();
+        let birthDay = $("#birthDay").val();
+        let birthMonth = $("#birthMonth").val();
+        let birthYear = $("#birthYear").val();
         let name = $("#name").val().trim();
         if(password != confirm_password){
             $("#msg").html("passwords must match.");

@@ -69,7 +69,6 @@
         if($username == $_SESSION['username']){
             $_SESSION['role'] = $newRole;
         }
-        
         die(json_encode(array(
             'result' => 0,
         )));
