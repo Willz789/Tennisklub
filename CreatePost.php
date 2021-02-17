@@ -97,11 +97,30 @@ function scaleImage($file) {
             <label for="tekst">Tekst:</label><br>
             <textarea rows = "5" cols = "60" name = "tekst" class= "text">Skriv information her</textarea><br>
             <label for="tekst">Type opslag:</label><br>
-            <select id="tekst" name="opslags_type">
+            <select id="opslags_type" name="opslags_type" onchange="getdata()">
                 <option value="Generel information">Generel information</option>
                 <option value="Event">Event</option>
                 <option value="Turnering">Turnering</option>
             </select><br>
+
+
+
+            <script>
+            function getdata(){
+                var opslags_type = document.getElementById('opslags_type').value;
+                switch(opslags_type) {
+                case "Generel information":
+                    console.log(1);
+                break;
+                case "Event":
+                    console.log(2);
+                break;
+                case "Turnering":
+                console.log(3);
+                }
+            }
+            </script>
+
             <br>
             <label for="tekst">Billede(ikke påkrævet):</label><br>
             <input type="file" id="billede" name="billede" accept="image/png, image/jpeg">
