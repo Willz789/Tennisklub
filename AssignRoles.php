@@ -13,7 +13,7 @@
         <script src="./assignRole/assignRole.js" defer></script>
     </head>
     <body>
-        <?php include("./core/Navbar.php"); 
+        <?php include("./navbar/Navbar.php"); 
         if(!isset($_SESSION['role'])){
             header("Location: ./Home-Page.php");
         } else if ($_SESSION['role'] != 2){

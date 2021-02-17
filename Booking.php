@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <?php
     session_start();
     require_once("core/db_connect.php");
@@ -11,6 +12,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     </head>
     <body>
-        <?php include("./core/Navbar.php"); ?>
+        <?php include("./navbar/Navbar.php"); ?>
     </body>
 </html>

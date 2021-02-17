@@ -22,7 +22,7 @@ CREATE TABLE `courts`(
 
 CREATE TABLE `information`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `opslag` BLOB
+    `opslag` MEDIUMBLOB
 );
 
 CREATE TABLE `bookings`(
@@ -61,7 +61,7 @@ INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, 
     'Lucas Sylvester',
     '10',
     '2',
-    '23/03/2002'
+    '24/01/2002'
 );
 INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, `ranking_points`, `role`, `birthday`) VALUES (
     'Asger',
@@ -71,5 +71,5 @@ INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, 
     'Asger Dyrholm',
     '12',
     '2',
-    '11/01/2002'
+    '24/04/2001'
 );

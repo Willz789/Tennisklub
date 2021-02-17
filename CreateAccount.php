@@ -7,16 +7,14 @@
 	<link rel="stylesheet" href="./style/Stylesheet.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
+	<title>Sign up</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
 	<script src="./account/createAccount.js" defer></script>
 </head>
 <body>
-<?php include("./core/Navbar.php"); ?>
+<?php include("./navbar/Navbar.php"); ?>
 <main>
-	<div id="msg"></div>
-	
 	<div id="login-form" class="login-container">
 		<h1> Create account </h1>
         <input type="text" id="name" class="login-input" placeholder = "Write your name" required>
@@ -31,8 +29,10 @@
 			<input type="number" id="birthMonth" placeholder = "month" required>
 			<input type="number" id="birthYear" placeholder = "year" required>
 		</div>
-		<button type="submit" id="submit" class="button-signup">Login</button>
+		<button type="submit" id="submit" class="button-signup">Sign up</button>
 	</div>
+
+	<p id="msg" style="color: red"></p>
 </main>
 
 </body>

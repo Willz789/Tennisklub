@@ -9,7 +9,9 @@ $(document).ready(function(){
         let birthMonth = $("#birthMonth").val();
         let birthYear = $("#birthYear").val();
         let name = $("#name").val().trim();
-        if(password == confirm_password && username.length >= 4 && password.length >= 4 && birthDay>0 && birthMonth>0){
+        if(password != confirm_password){
+            $("#msg").html("passwords must match.");
+        } else if (username.length >= 4 && password.length >= 4 && birthDay>0 && birthMonth>0){
             
             let extra0Day = "";
             let extra0Month = "";
@@ -51,11 +53,11 @@ $(document).ready(function(){
                                             window.location = "./Home-Page.php";
                                             break;
                                         case 1:
-                                            alert("Fejl i systemet 1");
+                                            alert("website-error");
                                             window.location = "./Home-Page.php";
                                             break;
                                         case 2:
-                                            alert("Fejl i hjemmesiden 2");
+                                            alert("website-error");
                                             window.location = "./Home-Page.php";
                                             break;
                                     }
@@ -63,18 +65,19 @@ $(document).ready(function(){
                             })
                             break;
                         case 1:
-                            alert("username already taken");
+                            $("#msg").html("Username is already taken.");
                             break;
                         case 2:
-                            alert("mailaddress is already in use");
+                            $("#msg").html("Mailaddress is already in use.");
                             break;
                         case 3:
-                            alert("Fejl i hjemmesiden");
+                            $("#msg").html("website-error.");
+                            break;
                     }
                 }
             })
         } else {
-            alert("wrong credentials");
+            $("#msg").html("wrong credentials.");
         }
     });
 })

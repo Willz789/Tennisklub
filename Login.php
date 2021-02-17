@@ -13,16 +13,16 @@
 	<script src="./account/login.js" defer></script>
 </head>
 <body>
-<?php include("./core/Navbar.php"); ?>
+<?php include("./navbar/Navbar.php"); ?>
 <main>
-	<div id="msg"></div>
-	
 	<div id="login-form">
 		<h1> Login </h1>
 		<input type="text" id="username" placeholder = "Username" required>
 		<input type="password" id="password" placeholder = "Password" required>
 		<button type="submit" id="submit">Login</button>
 	</div>
+
+	<p id="msg" style="color: red"></p>
 </main>
 
 </body>

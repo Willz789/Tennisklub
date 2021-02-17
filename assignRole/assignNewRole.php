@@ -66,6 +66,9 @@
 
         $updateSQL = "UPDATE `users` SET `role` = '$newRole' WHERE username='$username';";
         mysqli_query($db, $updateSQL);
+        if($username == $_SESSION['username']){
+            $_SESSION['role'] = $newRole;
+        }
         die(json_encode(array(
             'result' => 0,
         )));

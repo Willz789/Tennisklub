@@ -15,6 +15,7 @@ $(document).ready(function(){
                 json = JSON.parse(response);
                 switch(json.result){
                     case 0:     
+                        window.location = "./Home-Page.php";
                         alert("succesfully changed role");
                         break;
                     case 1:

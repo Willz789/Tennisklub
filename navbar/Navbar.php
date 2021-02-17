@@ -1,7 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="./Style/Navbar.css">
-        <script src="./core/Navbar.js" defer></script>
+        <script src="./navbar/Navbar.js" defer></script>
     </head>
     <body>
         <ul class="navbar">
@@ -26,9 +26,20 @@
                 <li class="nav-item" style="float:right">
                     <a class="navbar-link" href='account/logout.php'>Log out</a>
                 </li>
+                <?php
+                if(($_SESSION['role'])==2){
+                    ?>
+                <li class="nav-item">
+                    <a class="navbar-link" href='./CreatePost.php'>Lav Opslag</a>
+                </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item">
                     <a class="navbar-link" href='./Booking.php'>Booking</a>
                 </li>
+                </li>
+                
                 <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 2){

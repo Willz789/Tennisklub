@@ -3,7 +3,6 @@ $(document).ready(function(){
         
         let username = $("#username").val().trim();
         let password = $("#password").val().trim();
-
         if(username.length >= 4 && password.length >= 4){
 
             $.ajax({
@@ -14,16 +13,17 @@ $(document).ready(function(){
                     password: password
                 },
                 success: function(response) {
+
                     json = JSON.parse(response);
                     switch(json.result){
                         case 0:     
                             window.location = "./Home-Page.php";
                             break;
                         case 1:
-                            alert("username or password was incorrect");
+                            $("#msg").html("username or password was incorrect.");
                             break;
                         case 2:
-                            alert("Fejl i hjemmesiden");
+                            $("#msg").html("website-error.");
                             break;
                     }
                 }
