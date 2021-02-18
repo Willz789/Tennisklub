@@ -97,47 +97,101 @@ function scaleImage($file) {
             <label for="tekst">Tekst:</label><br>
             <textarea rows = "5" cols = "60" name = "tekst" class= "text">Skriv information her</textarea><br>
             <label for="tekst">Type opslag:</label><br>
-            <select id="opslags_type" name="opslags_type" onchange="getdata()">
+            <select id="opslags_type" name="opslags_type" onchange="changeform()">
                 <option value="Generel information">Generel information</option>
                 <option value="Event">Event</option>
                 <option value="Turnering">Turnering</option>
             </select><br>
+            <label class="turnerings_opslag" for="tekst">Minimums alder:</label><br class="turnerings_opslag">
+            <input type="number" name="min_alder" class="turnerings_opslag" min="5" max="99"><br class="turnerings_opslag"> 
+            <label class="turnerings_opslag" for="tekst">Max alder:</label><br class="turnerings_opslag">
+            <input type="number" name="max_alder" class="turnerings_opslag" min="5" max="99"> <br>
+            
 
-
-
-            <script>
-            function getdata(){
-                var opslags_type = document.getElementById('opslags_type').value;
-                switch(opslags_type) {
-                case "Generel information":
-                    console.log(1);
-                break;
-                case "Event":
-                    console.log(2);
-                break;
-                case "Turnering":
-                console.log(3);
-                }
-            }
-            </script>
-
+            <label class="informations_opslag event_opslag" for="tekst">Gruppe:</label><br class="informations_opslag event_opslag">
+            <select class="informations_opslag event_opslag" name="Gruppe" onchange="changeform()">
+                <option value="Alle">Alle</option>
+                <option value="Medlemmer">Medlemmer</option>
+                <option value="Trænere">Trænere</option>
+                <option value="Administration">Administration</option>
+            </select>
             <br>
+            <br>
+
             <label for="tekst">Billede(ikke påkrævet):</label><br>
             <input type="file" id="billede" name="billede" accept="image/png, image/jpeg">
 
             <input type="submit" value="Submit" name="submit">
         </form>
 
+
+        <script>
+        changeform();
+            function changeform(){
+                var opslags_type = document.getElementById('opslags_type').value;
+                console.log(opslags_type);
+                var turnering = document.getElementsByClassName("turnerings_opslag");
+                var event = document.getElementsByClassName("event_opslag");
+                var information = document.getElementsByClassName("informations_opslag");
+
+                switch(opslags_type) {
+                case "Generel information":
+                    for (i = 0; i < turnering.length; i++) {
+                        turnering[i].style.display = "none";
+                    }
+                    for (i = 0; i < event.length; i++) {
+                        event[i].style.display = "none";
+                     }
+                    for (i = 0; i < information.length; i++) {
+                        information[i].style.display = "inline";
+                    }
+                    
+                break;
+                case "Event":
+                    for (i = 0; i < turnering.length; i++) {
+                        turnering[i].style.display = "none";
+                    }
+                    for (i = 0; i < information.length; i++) {
+                        information[i].style.display = "none";
+                    }
+                    for (i = 0; i < event.length; i++) {
+                        event[i].style.display = "inline";
+                     }
+                    
+                break;
+                case "Turnering":
+                    
+                    for (i = 0; i < event.length; i++) {
+                        event[i].style.display = "none";
+                     }
+                    for (i = 0; i < information.length; i++) {
+                        information[i].style.display = "none";
+                    }
+                    for (i = 0; i < turnering.length; i++) {
+                        turnering[i].style.display = "inline";
+                    }
+                }
+            }
+            </script>
+
+
         <?php 
             if(isset($_POST['submit'])){
                 $titel = $_REQUEST["titel"];
                 $tekst = $_REQUEST["tekst"];
-
-                if(isset($_FILES["billede"]["tmp_name"])){
-                    $billedesrc = $_FILES["billede"]["tmp_name"];
-                    echo(isset($_FILES["billede"]["tmp_name"]));
+                //$min_alder = $_REQUEST["turnering"];
+                echo($_REQUEST["max_alder"]);
+                
+                $billedesrc = $_FILES["billede"]["tmp_name"];
+                
+                if($billedesrc!=null){
+                   
+                    
                     $img = scaleImage($billedesrc);
                     $image_type = getimagesize($billedesrc)["mime"];
+                }else{
+                    $img = null;
+                    $image_type = null;
                 }
                $nyt_opslag =  new Information($titel, $tekst, $img, $image_type);
                gem_opslag($nyt_opslag);
