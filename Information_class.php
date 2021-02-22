@@ -68,6 +68,8 @@ function gem_opslag($opslag){
 
             function __contruct(){
                 parent::__construct($this->titel, $this->tekst);
+                echo("Turnering"); // til test
+                return true;
             }
 
             function display() {
@@ -82,6 +84,8 @@ function gem_opslag($opslag){
     
             function display() {
                 parent::display();
+                echo("Event");// til test
+                return true;
             }
         }
 

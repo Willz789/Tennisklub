@@ -35,10 +35,12 @@
             $opslag = $opslag['opslag'];
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
-            if($opslag->display()){
-                $i = $i-1;
+            echo($i);
+            if($opslag->display()==true){
+                
+                //$i = $i-1;
             }
-            
+            $i = $i-1;
         }
 
 

@@ -95,7 +95,7 @@ function scaleImage($file) {
             <label for="titel">Titel:</label><br>
             <input type="text" id="titel" name="titel"><br>
             <label for="tekst">Tekst:</label><br>
-            <textarea rows = "5" cols = "60" name = "tekst" class= "text">Skriv information her</textarea><br>
+            <textarea rows = "5" cols = "60" name = "tekst" class= "text"></textarea><br>
             <label for="tekst">Type opslag:</label><br>
             <select id="opslags_type" name="opslags_type" onchange="changeform()">
                 <option value="Generel information">Generel information</option>
@@ -179,9 +179,8 @@ function scaleImage($file) {
             if(isset($_POST['submit'])){
                 $titel = $_REQUEST["titel"];
                 $tekst = $_REQUEST["tekst"];
-                //$min_alder = $_REQUEST["turnering"];
-                echo($_REQUEST["max_alder"]);
-                
+                $opslags_type = $_REQUEST["opslags_type"];
+
                 $billedesrc = $_FILES["billede"]["tmp_name"];
                 
                 if($billedesrc!=null){
@@ -193,8 +192,23 @@ function scaleImage($file) {
                     $img = null;
                     $image_type = null;
                 }
-               $nyt_opslag =  new Information($titel, $tekst, $img, $image_type);
+
+                switch ($opslags_type){
+                    case "Generel information":
+                        $nyt_opslag =  new Information($titel, $tekst, $img, $image_type);
+                    break;
+                    case "Event":
+                        $nyt_opslag =  new Event($titel, $tekst, $img, $image_type);
+                    break;
+                    case "Turnering":
+                        $nyt_opslag =  new Turnering($titel, $tekst, $img, $image_type);
+                    break;
+                }
+
                gem_opslag($nyt_opslag);
+
+
+
 
             }
 } ?>
