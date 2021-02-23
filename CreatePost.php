@@ -91,7 +91,7 @@ function scaleImage($file) {
             header("Location: ./Home-Page.php");
         } else {
         ?>
-        <form  action="" autocomplete="off" enctype="multipart/form-data" method="POST">
+        <form action="" autocomplete="off" enctype="multipart/form-data" method="POST">
             <label for="titel">Titel:</label><br>
             <input type="text" id="titel" name="titel"><br>
             <label for="tekst">Tekst:</label><br>
@@ -109,7 +109,7 @@ function scaleImage($file) {
             
 
             <label class="informations_opslag event_opslag" for="tekst">Gruppe:</label><br class="informations_opslag event_opslag">
-            <select class="informations_opslag event_opslag" name="Gruppe" onchange="changeform()">
+            <select class="informations_opslag event_opslag" name="gruppe" onchange="changeform()">
                 <option value="Alle">Alle</option>
                 <option value="Medlemmer">Medlemmer</option>
                 <option value="Trænere">Trænere</option>
@@ -180,8 +180,13 @@ function scaleImage($file) {
                 $titel = $_REQUEST["titel"];
                 $tekst = $_REQUEST["tekst"];
                 $opslags_type = $_REQUEST["opslags_type"];
+                $gruppe = $_REQUEST["gruppe"];
+                $min_alder = $_REQUEST["min_alder"];
+                $max_alder = $_REQUEST["max_alder"];
+
 
                 $billedesrc = $_FILES["billede"]["tmp_name"];
+                
                 
                 if($billedesrc!=null){
                    
@@ -195,13 +200,13 @@ function scaleImage($file) {
 
                 switch ($opslags_type){
                     case "Generel information":
-                        $nyt_opslag =  new Information($titel, $tekst, $img, $image_type);
+                        $nyt_opslag =  new Information($titel, $tekst, $img, $image_type, $gruppe);
                     break;
                     case "Event":
-                        $nyt_opslag =  new Event($titel, $tekst, $img, $image_type);
+                        $nyt_opslag =  new Event($titel, $tekst, $img, $image_type, $gruppe);
                     break;
                     case "Turnering":
-                        $nyt_opslag =  new Turnering($titel, $tekst, $img, $image_type);
+                        $nyt_opslag =  new Turnering($titel, $tekst, $img, $image_type, $min_alder, $max_alder);
                     break;
                 }
 

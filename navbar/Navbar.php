@@ -3,10 +3,12 @@
         <link rel="stylesheet" href="./Style/Navbar.css">
         <script src="./navbar/Navbar.js" defer></script>
     </head>
-    <body>
         <ul class="navbar">
             <li class="nav-item">
                 <a class="navbar-link" href="./Home-Page.php">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link" href="./Training.php">Training</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-link" href="./Forum.php">Forum</a>
@@ -38,8 +40,6 @@
                 <li class="nav-item">
                     <a class="navbar-link" href='./Booking.php'>Booking</a>
                 </li>
-                </li>
-                
                 <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 2){

@@ -35,7 +35,7 @@
             $opslag = $opslag['opslag'];
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
-            echo($i);
+            
             if($opslag->display()==true){
                 
                 //$i = $i-1;

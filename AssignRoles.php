@@ -20,7 +20,7 @@
             header("Location: ./Home-Page.php");
         } else {
             ?>
-            <h1>Assign Role</h1>
+            <h1 class="titel">Assign Role</h1>
             <input type="text" id="username" class="assign-role-username" placeholder = "Their username" required>
             <input type="password" id="password" placeholder = "Your password" required>
             <label for="label-new-role">Their new role: </label>

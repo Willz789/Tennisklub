@@ -1,4 +1,4 @@
-ul {
+ul.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -6,14 +6,15 @@ ul {
     background-color: #333;
     position: -webkit-sticky; /*til Safari*/
     position: sticky;
-    top: 0;
+    top: 5px;
+    z-index: 5;
 }
   
-li {
+li.nav-item {
     float: left;
 }
   
-li a {
+li a.navbar-link {
     display: block;
     color: white;
     text-align: center;
@@ -21,7 +22,7 @@ li a {
     text-decoration: none;
 }
   
-li a:hover {
+li a.navbar-link:hover {
     background-color: #111;
 }
 

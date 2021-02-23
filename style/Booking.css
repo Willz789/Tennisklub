@@ -1,0 +1,74 @@
+.bookings-tables {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.bookings-tables .day-div {
+  height:fit-content;
+  width: fit-content;
+  padding-right: 50px;
+}
+
+.day-div .title-div p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.day-div .table-court-number {
+  border-left: 2px solid black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.day-div table {
+  border: 2px solid black;
+  border-collapse:collapse;
+}
+
+td.table-field-booking {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  width: 70px;
+  padding: 0;
+}
+
+.day-div .table-row-time {
+  border-top: 2px solid black;
+  text-align:center;
+}
+
+.booking-button-red {
+  background-color:#8B0000; 
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width:100%;
+  height:100%;
+}
+
+.booking-button-green {
+  background-color: #4CAF50;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width:100%;
+  height:100%;
+}
+
+.booking-button-blue {
+  background-color:#6495ED;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width:100%;
+  height:100%;
+}

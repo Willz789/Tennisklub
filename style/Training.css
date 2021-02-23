@@ -1,0 +1,163 @@
+.teams-div {
+    background-color: grey;
+    width: fit-content;
+    height: fit-content;
+    min-height: 50%;
+    min-width: 25%;
+    padding: 15px 20px 15px 10px;
+    position:absolute;
+    top: 15%;
+    left: 5%;
+    border-radius: 5%;
+    border: 2px solid black;
+}
+
+.team-row form input[type="submit"] {
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    color: black;
+    display: block;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.team-row form input[type="submit"]:hover {
+    text-decoration: underline;
+}
+
+.team-members-div {
+    width:fit-content;
+    margin-top: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-members-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    background-color: grey;
+}
+
+.team-members-table-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+table .team-members-row {
+    border-top: 2px solid black;
+}
+
+.team-members-row-data {
+    border-left: 2px solid black;
+    padding-inline: 10px;
+}
+
+.team-members-row-title {
+    padding-inline: 10px;
+}
+
+form .join-team-button {
+    position: relative;
+    top: 100;
+    text-align: center;
+    display: inline-block;
+    padding: 0.5em 2em;
+    border: 0;
+    border-radius: 2em;
+    text-decoration: none;
+    text-align: center;
+    background-color: green;
+    transition: all 200ms;
+    outline: none;  
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form .join-team-button:hover {
+    background-color: darkgreen;
+}
+
+form .leave-team-button {
+    position: relative;
+    top: 100;
+    text-align: center;
+    display: inline-block;
+    padding: 0.5em 2em;
+    border: 0;
+    border-radius: 2em;
+    text-decoration: none;
+    text-align: center;
+    background-color: red;
+    transition: all 200ms;
+    outline: none;  
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form .leave-team-button:hover {
+    background-color: darkred;
+}
+
+.create-team-container {
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    padding-top: 2%;
+    padding-bottom: 5% ;
+    transform: translate(-50%, -50%);
+    border-radius: 5%;
+    text-align: center;
+    background: grey;
+    border: 2px solid black;
+}
+
+.create-team-container input[type="text"], .create-team-container input[type="Number"] {
+    position: relative;
+    top: 20%;  
+    text-align: center;
+    width: 100%;   
+    background: lightgrey;
+    margin: 1px auto;
+    border: 0;
+    border-radius: 2em;
+    padding: 14px 0;
+    transition: all 200ms;
+    outline: none; 
+}
+
+/* Chrome, Safari, Edge, Opera */
+.create-team-container input::-webkit-outer-spin-button,
+.create-team-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.create-team-container input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.create-team-container button {
+    position: relative;
+    top: 100;
+    text-align: center;
+    display: inline-block;
+    padding: 0.5em 2em;
+    border: 0;
+    border-radius: 2em;
+    text-decoration: none;
+    text-align: center;
+    color: var(--three);
+    background-color: green;
+    transition: all 200ms;
+    outline: none;  
+    cursor: pointer;
+}
+.create-team-container button:hover {
+    background-color: darkgreen;
+}

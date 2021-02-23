@@ -17,12 +17,13 @@ CREATE TABLE `users`(
 CREATE TABLE `courts`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `court_number` INT NOT NULL,
+    `date` VARCHAR(255) NOT NULL,
     `time` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `information`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `opslag` MEDIUMBLOB
+    `opslag` BLOB
 );
 
 CREATE TABLE `bookings`(
@@ -34,7 +35,8 @@ CREATE TABLE `bookings`(
 CREATE TABLE `teams`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
-    `trainer_user_id` INT NOT NULL
+    `trainer_user_id` INT NOT NULL,
+    `minBirthYear` INT
 );
 
 CREATE TABLE `team_members`(
@@ -47,7 +49,7 @@ INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, 
     'William',
     '$2y$10$aqFnpecTrsohwx8bR.TZAuBYlhzXdFuLbfgDtQPZggtIuSAS.BOq2',
     '12345678',
-    '@williammistarz@gmail.com',
+    'williammistarz@gmail.com',
     'William Egholm Mistarz',
     '8',
     '2',
@@ -57,19 +59,49 @@ INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, 
     'Lucas',
     '$2y$10$aqFnpecTrsohwx8bR.TZAuBYlhzXdFuLbfgDtQPZggtIuSAS.BOq2',
     '12345678',
-    '@lucassylvester02@gmail.com',
+    'lucassylvester02@gmail.com',
     'Lucas Sylvester',
     '10',
     '2',
-    '24/01/2002'
+    '23/03/2002'
 );
 INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, `ranking_points`, `role`, `birthday`) VALUES (
     'Asger',
     '$2y$10$aqFnpecTrsohwx8bR.TZAuBYlhzXdFuLbfgDtQPZggtIuSAS.BOq2',
     '12345678',
-    '@asger2860@gmail.com',
+    'asger2860@gmail.com',
     'Asger Dyrholm',
     '12',
     '2',
-    '24/04/2001'
+    '11/01/2002'
+);
+
+INSERT INTO `courts`(`court_number`, `date`, `time`) VALUES (
+    '3',
+    'Sunday 21st February 2021',
+    '00:00'
+);
+
+INSERT INTO `bookings`(`user_id`, `court_id`) VALUES (
+    '1',
+    '1'
+);
+
+INSERT INTO `teams`(`name`, `trainer_user_id`, `minBirthYear`) VALUES (
+    'Juniors',
+    '2',
+    '2002'
+);
+
+INSERT INTO `team_members`(`user_id`, `team_id`) VALUES (
+    '1',
+    '1'
+);
+INSERT INTO `team_members`(`user_id`, `team_id`) VALUES (
+    '2',
+    '1'
+);
+INSERT INTO `team_members`(`user_id`, `team_id`) VALUES (
+    '3',
+    '1'
 );
