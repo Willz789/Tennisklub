@@ -1,8 +1,10 @@
+/* Tabeller med baner der kan bookes ligger horizontalt */
 .bookings-tables {
   display: flex;
   flex-wrap: nowrap;
 }
 
+/* Jeg har tilpasset størrelsen af div'en til kun at fylde størrelsen af tabellen */
 .bookings-tables .day-div {
   height:fit-content;
   width: fit-content;
@@ -36,6 +38,8 @@ td.table-field-booking {
   border-top: 2px solid black;
   text-align:center;
 }
+
+/* Farver på booking felter */
 
 .booking-button-red {
   background-color:#8B0000; 
