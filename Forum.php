@@ -24,25 +24,33 @@
         if(mysqli_num_rows($result) == 0){
             die("No posts in the database");
         }
-        // Gemmer alle opslagene i en liste
-        $rows = [];
-        while($row = mysqli_fetch_assoc($result)){
-            array_push($rows, $row['opslag']);
-        }
-        rsort($rows); // rsort() vender om på rækkefølgen i listen, da vi gerne vil have de nye opslag øverst på siden.
+        
+        $opslag_vist = 0;
         $maxOpslag = 20;
-        $i = 0;
-        foreach($rows as $opslag){
-            // For hvert opslag bliver det decoded fra BLOB-element som kan gemmes i databasen til php-objekt.
+        //find id'et på den nyeste post
+        $sidst_opslag_id = mysqli_fetch_array($result)['id'];
+        //sæt i lig med det nyeste id
+        $i=$sidst_opslag_id;
+        /*kør et loop indtil der enten ikke er flere post at hente, eller indtil der bliver displayet maxOpslag.
+        display() retunerer true hvis opslaget er gyldigt og bliver vist 
+        og false hvsi brugeren ikke har ret til at interegere eller se opslaget*/
+        while($opslag_vist<$maxOpslag){
+            //hent opslag hvor id er lig med i
+            $sqli = "SELECT * FROM `information` WHERE id=('$i')";
+            $result = mysqli_query($db, $sqli);
+            //break loop hvis der ikke er flere opslag
+            if (is_null( $opslag = mysqli_fetch_array($result))){
+                break;
+            }
+            $opslag = $opslag['opslag'];
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
             
-            // Hvis man her en vigtig nok rolle til at se opslaget, så køres display()-funktion for objektet.
-            if($i < $maxOpslag){
-                if($opslag->display() == true){
-                    $i++;
-                }
+            if($opslag->display()==true){
+                
+                $opslag_vist++;
             }
+            $i = $i-1;
         }
         ?>
     </body>

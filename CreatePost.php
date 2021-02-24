@@ -95,7 +95,7 @@
             <select id="opslags_type" name="opslags_type" onchange="changeform()">
                 <option value="Generel information">General information</option>
                 <option value="Event">Event</option>
-                <option value="Turnering">Turnament</option>
+                <option value="Turnering">Tournament</option>
             </select><br>
 
             <!-- Min_alder og Max_alder skal kun tilføjes for turnerings-opslag. -->
