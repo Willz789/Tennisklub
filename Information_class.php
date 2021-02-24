@@ -42,7 +42,7 @@ class Information {
 
     // Display-funktion der viser opslaget på forummet.
     public function display() {
-        if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
+        
             echo("
             <div class=\"opslagsbox\">
                 <h1 class=\"titel\">{$this->titel}</h1>
@@ -68,9 +68,7 @@ class Information {
             </div>
             ");
             return true;
-        } else {
-            return false;
-        }
+        
     }
 }
 

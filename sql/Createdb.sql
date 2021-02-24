@@ -31,7 +31,7 @@ CREATE TABLE `courts`(
 /* Tabel med opslag til forum. */
 CREATE TABLE `information`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `opslag` BLOB
+    `opslag` MEDIUMBLOB
 );
 
 
