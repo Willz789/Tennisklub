@@ -16,7 +16,7 @@
         include("Information_class.php"); // Indkluderer script med klasser.
 
         // Vælger alle opslag som er gemt i databasen.
-        $sqli = "SELECT * FROM `information`;";
+        $sqli = "SELECT * FROM `information` WHERE id=(SELECT max(id) FROM `information`)";
         $result = mysqli_query($db, $sqli);
         if(!$result ){
             die("Couldn't query select-statement");
@@ -45,11 +45,12 @@
             $opslag = $opslag['opslag'];
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
-            
+            echo(" <div class=\"row\">");
             if($opslag->display()==true){
                 
                 $opslag_vist++;
             }
+            echo(" </div>");
             $i = $i-1;
         }
         ?>

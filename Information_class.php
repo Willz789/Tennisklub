@@ -19,7 +19,7 @@ function gem_opslag($opslag){
 }
 
 // parent-klasse til opslag.
-class Information {
+class Opslag {
     public $titel;
     public $tekst;
     public $image;
@@ -67,12 +67,31 @@ class Information {
                 echo("
             </div>
             ");
-            return true;
-        
+            
     }
 }
 
-class Turnering extends Information{
+class Information extends Opslag {
+
+    function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
+        parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe);
+        
+    }
+
+    function display(){
+        if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
+            parent::display();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+}
+
+
+class Turnering extends Opslag{
     public $min_alder; // Nye variabler som kun gælder for turneringer.
     public $max_alder;
 
@@ -115,7 +134,7 @@ class Turnering extends Information{
     }
 }
 
-class Event extends Information {
+class Event extends Opslag {
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
         parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe);
         
