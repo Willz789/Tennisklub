@@ -59,6 +59,7 @@
 
 }
 
+<<<<<<< Updated upstream
 .forum-post-image {
     height: 200px;
 }
@@ -68,3 +69,56 @@
     max-height: 100%;
     width: auto;
 }
+=======
+.tilmeld-event-button {
+    background-color: green;
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+}
+
+.tilmeld-event-button:hover {
+    background-color: darkgreen;
+}
+
+.frameld-event-button {
+    background-color: red;
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+}
+.frameld-event-button:hover {
+    background-color: darkred;
+}
+
+div.members {
+    background-color: gray;
+    width:fit-content;
+    padding-inline: 10px;
+    padding-bottom: 10px;;
+    margin-top:10px;
+}
+
+li.member-row {
+    /* display: block; */
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+div.member-info {
+    display:none;
+}
+
+li.member-row:hover div {
+    display: inline-block;
+    z-index: 5;
+    background-color:lightgrey;
+    position:absolute;
+    overflow:hidden;
+    width:fit-content;
+    /* margin-left: 150px; */
+    padding: 10px 10px 10px 10px;
+    border: 2px solid black;    
+}
+
+
+>>>>>>> Stashed changes

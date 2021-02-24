@@ -25,6 +25,18 @@ CREATE TABLE `information`(
     `opslag` BLOB
 );
 
+<<<<<<< Updated upstream
+=======
+
+/* Joins mellem events og users */
+CREATE TABLE `event_members`(
+    `id`INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT NOT NULL,
+    `opslag_id` INT NOT NULL
+);
+
+/* Joins mellem baner der kan bookes og brugere som har booket dem. */
+>>>>>>> Stashed changes
 CREATE TABLE `bookings`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,

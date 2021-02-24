@@ -35,11 +35,35 @@
         if(!$result){
             die();
         }
+<<<<<<< Updated upstream
         while($row = mysqli_fetch_array($result)){
             extract($row);
             $opslag1 = base64_decode($row['opslag']);
             $opslag2 = unserialize($opslag1);
             $opslag2->display();
+=======
+        // Gemmer alle opslagene i en liste
+        $rows = [];
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($rows, $row);
+        }
+        rsort($rows); // rsort() vender om på rækkefølgen i listen, da vi gerne vil have de nye opslag øverst på siden.
+        $maxOpslag = 20;
+        $i = 0;
+        foreach($rows as $row){
+            // For hvert opslag bliver det decoded fra BLOB-element som kan gemmes i databasen til php-objekt.
+            $opslag_id = $row['id'];
+            $opslag = $row['opslag'];
+            $opslag = base64_decode($opslag);
+            $opslag = unserialize($opslag);
+            
+            // Hvis man her en vigtig nok rolle til at se opslaget, så køres display()-funktion for objektet.
+            if($i < $maxOpslag){
+                if($opslag->display($opslag_id) == true){
+                    $i++;
+                }
+            }
+>>>>>>> Stashed changes
         }
 
 
