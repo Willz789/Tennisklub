@@ -30,18 +30,18 @@
             array_push($rows, $row['opslag']);
         }
         rsort($rows); // rsort() vender om på rækkefølgen i listen, da vi gerne vil have de nye opslag øverst på siden.
+        $maxOpslag = 20;
+        $i = 0;
         foreach($rows as $opslag){
             // For hvert opslag bliver det decoded fra BLOB-element som kan gemmes i databasen til php-objekt.
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
             
             // Hvis man her en vigtig nok rolle til at se opslaget, så køres display()-funktion for objektet.
-            if(isset($_SESSION['user_id'])){
-                if($_SESSION['role'] >= $opslag->gruppe){
-                    $opslag->display();
+            if($i < $maxOpslag){
+                if($opslag->display() == true){
+                    $i++;
                 }
-            } else if($opslag->gruppe == -1){
-                $opslag->display();
             }
         }
         ?>

@@ -96,7 +96,6 @@
                 <option value="Generel information">General information</option>
                 <option value="Event">Event</option>
                 <option value="Turnering">Turnament</option>
-                <option value="Træner_Information">Coach Information</option>
             </select><br>
 
             <!-- Min_alder og Max_alder skal kun tilføjes for turnerings-opslag. -->
@@ -104,7 +103,7 @@
             <input type="number" name="min_alder" class="turnerings_opslag" min="5" max="99"><br class="turnerings_opslag"> 
             <label class="turnerings_opslag" for="tekst">Maximum age:</label><br class="turnerings_opslag">
             <input type="number" name="max_alder" class="turnerings_opslag" min="5" max="99"> <br>
-            <!-- Gruppen som kan se opslaget er ikke tilgængelig at vælge for træneropslag og turneringsopslag. -->
+            <!-- Gruppen som kan se opslaget er ikke tilgængelig at vælge for turneringsopslag. -->
             <label class="informations_opslag event_opslag" for="tekst">Gruppe:</label><br class="informations_opslag event_opslag">
             <select class="informations_opslag event_opslag" name="gruppe" onchange="changeform()">
                 <option value="-1">Everyone</option>
@@ -130,16 +129,12 @@
                 var turnering = document.getElementsByClassName("turnerings_opslag");
                 var event = document.getElementsByClassName("event_opslag");
                 var information = document.getElementsByClassName("informations_opslag");
-                var træner_information = document.getElementsByClassName("træner_information_opslag");
 
                 for (i = 0; i < turnering.length; i++) {
                     turnering[i].style.display = "none";
                 }
                 for (i = 0; i < event.length; i++) {
                     event[i].style.display = "none";
-                }
-                for (i = 0; i < træner_information.length; i++) {
-                    træner_information[i].style.display = "none";
                 }
                 for (i = 0; i < information.length; i++) {
                     information[i].style.display = "none";
@@ -161,12 +156,6 @@
                     case "Turnering":
                         for (i = 0; i < turnering.length; i++) {
                             turnering[i].style.display = "inline";
-                        }
-                        break;
-
-                    case "Træner_Information":
-                        for (i = 0; i < træner_information.length; i++) {
-                            træner_information[i].style.display = "inline";
                         }
                         break;
                 }
@@ -194,7 +183,7 @@
                 }
 
                 // Afhængigt af opslags-typen skal der skabes et nyt objekt.
-                // "Event", "Turnering" og "Træner_information" er subklasser til "Information.
+                // "Event" og "Turnering" er subklasser til "Information.
                 switch ($opslags_type){
                     case "Generel information":
                         $post_type = 0;
@@ -208,11 +197,6 @@
                         $post_type = 2;
                         $gruppe = -1;
                         $nyt_opslag = new Turnering($post_type, $titel, $tekst, $img, $image_type, $gruppe, $min_alder, $max_alder);
-                        break;
-                    case "Træner_Information":
-                        $post_type = 3;
-                        $gruppe = 1;
-                        $nyt_opslag = new Træner_information($post_type, $titel, $tekst, $img, $image_type, $gruppe);
                         break;
                 }
                 gem_opslag($nyt_opslag); // Funktion i scriptet "Information_class.php" som gemmer objekt i database som BLOB.

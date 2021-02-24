@@ -42,30 +42,35 @@ class Information {
 
     // Display-funktion der viser opslaget på forummet.
     public function display() {
-        echo("
-        <div class=\"opslagsbox\">
-            <h1 class=\"titel\">{$this->titel}</h1>
-            <p class=\"tekst\">{$this->tekst}</p>
-            ");
-
-            if(isset($this->image))
-            {
-            // Enable output buffering
-            ob_start();
-            echo($this->image);
-            // Capture the output
-            $imagedata = ob_get_contents();
-            // Clear the output buffer
-            ob_end_clean();
-
-            echo '<img src="data:'.$this->image_type.';base64,'.base64_encode($imagedata).'">';
-            }
-
-            echo("<p> Dato:{$this->dato}</p>");
-
+        if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
             echo("
-        </div>
-        ");
+            <div class=\"opslagsbox\">
+                <h1 class=\"titel\">{$this->titel}</h1>
+                <p class=\"tekst\">{$this->tekst}</p>
+                ");
+
+                if(isset($this->image))
+                {
+                // Enable output buffering
+                ob_start();
+                echo($this->image);
+                // Capture the output
+                $imagedata = ob_get_contents();
+                // Clear the output buffer
+                ob_end_clean();
+
+                echo '<img src="data:'.$this->image_type.';base64,'.base64_encode($imagedata).'">';
+                }
+
+                echo("<p> Dato:{$this->dato}</p>");
+
+                echo("
+            </div>
+            ");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -82,27 +87,34 @@ class Turnering extends Information{
     }
 
     function display() {
-        $birthday = $_SESSION['birthday'];
-        // del op i array hvor [0] er dag, [1] er måned, og [2] er årtals
-        $birthday = explode("/",$birthday);
-        
-        //del nuværende dato for posten op i array på samme måde
-        $dato_opdelt = explode("/", $this->dato);
+        if(!isset($_SESSION['user_id'])){
+            return false;
+        } else {
+            $birthday = $_SESSION['birthday'];
+            // del op i array hvor [0] er dag, [1] er måned, og [2] er årtals
+            $birthday = explode("/",$birthday);
+            
+            //del nuværende dato for posten op i array på samme måde
+            $dato_opdelt = explode("/", $this->dato);
 
-        // Opslaget skal kun vises, hvis brugeren er inde i aldersgruppen for turneringen.
-        $alder = $dato_opdelt[2]-$birthday[2];
-        if ($dato_opdelt[1]==$birthday[1]){
-            if ($dato_opdelt[0]>$birthday[0]){
+            // Opslaget skal kun vises, hvis brugeren er inde i aldersgruppen for turneringen.
+            $alder = $dato_opdelt[2]-$birthday[2];
+            if ($dato_opdelt[1]==$birthday[1]){
+                if ($dato_opdelt[0]>$birthday[0]){
+                    $alder = $alder-1;
+                }
+            } elseif ($dato_opdelt[1]<$birthday[1]){
                 $alder = $alder-1;
             }
-        } elseif ($dato_opdelt[1]<$birthday[1]){
-            $alder = $alder-1;
-        }
-        if (($alder>=$this->min_alder)&&($alder<=$this->max_alder)){
-            parent::display();
+            if (($alder>=$this->min_alder)&&($alder<=$this->max_alder)){
+                if(parent::display() == true){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
     }
-    
 }
 
 class Event extends Information {
@@ -111,20 +123,16 @@ class Event extends Information {
         
     }
 
-    // Display er samme som parent->display().
-}
-
-class Træner_information extends Information {
-    function __contruct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe);
+    function display(){
+        if(parent::display() == true){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    function display() {
-        // display-funktionen skal kun vises, hvis man er træner eller admin.
-        if($_SESSION['role']>=1){
-            parent::display();
-
-        }
+    function tilmeld(){
+        
     }
 }
 
