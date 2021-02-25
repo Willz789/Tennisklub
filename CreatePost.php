@@ -105,11 +105,11 @@
             <input type="number" name="max_alder" class="turnerings_opslag" min="5" max="99"> <br>
             <!-- Gruppen som kan se opslaget er ikke tilgængelig at vælge for turneringsopslag. -->
             <label class="informations_opslag event_opslag" for="tekst">Gruppe:</label><br class="informations_opslag event_opslag">
-            <select class="informations_opslag event_opslag" name="gruppe" onchange="changeform()">
-                <option value="-1">Everyone</option>
+            <select class="informations_opslag event_opslag" name="gruppe" onchange="changeform()">  
                 <option value="0">Members</option>
                 <option value="1">Coaches</option>
                 <option value="2">Administration</option>
+                <option value="-1" class="informations_opslag" >Everyone</option>
             </select>
             <br>
             <br>

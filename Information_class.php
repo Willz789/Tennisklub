@@ -28,20 +28,19 @@ class Opslag {
     public $post_type;
 
     // Klassens constructor.
-    function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe) {
+    function __construct($post_type, $titel, $tekst, $image, $image_type) {
         $this->titel = $titel;
         $this->tekst = $tekst;
         $this->image = $image;
         $this->image_type = $image_type;
-        $this->gruppe = $gruppe;
         $this->post_type = $post_type;
-    
+        //$this->tilføjelse = null;
         $this->dato = date('d/m/Y');
         
     }
 
     // Display-funktion der viser opslaget på forummet.
-    public function display() {
+    public function display($opslags_id) {
         
             echo("
             <div class=\"opslagsbox\">
@@ -62,11 +61,10 @@ class Opslag {
                 echo '<img src="data:'.$this->image_type.';base64,'.base64_encode($imagedata).'">';
                 }
 
+
                 echo("<p> Dato:{$this->dato}</p>");
 
-                echo("
-            </div>
-            ");
+            //echo(" </div>");
             
     }
 }
@@ -74,13 +72,13 @@ class Opslag {
 class Information extends Opslag {
 
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe);
-        
+        parent::__construct($post_type, $titel, $tekst, $image, $image_type);
+        $this->gruppe = $gruppe;
     }
 
-    function display(){
+    function display($opslags_id){
         if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
-            parent::display();
+            parent::display($opslags_id);
             return true;
         } else {
             return false;
@@ -97,13 +95,12 @@ class Turnering extends Opslag{
 
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe, $min_alder, $max_alder){
         //passerer de normale argumenter videre til basis konstruktøren
-        $gruppe = null;
         parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe); // Kører parent-constructor
         $this->min_alder = $min_alder;
         $this->max_alder = $max_alder;
     }
 
-    function display() {
+    function display($opslags_id) {
         if(!isset($_SESSION['user_id'])){
             return false;
         } else {
@@ -124,33 +121,101 @@ class Turnering extends Opslag{
                 $alder = $alder-1;
             }
             if (($alder>=$this->min_alder)&&($alder<=$this->max_alder)){
-                if(parent::display() == true){
-                    return true;
+                parent::display($opslags_id);
+                return true;
                 } else {
                     return false;
                 }
-            }
+            
         }
     }
 }
 
 class Event extends Opslag {
+
+    public $tilmeldte;
+
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe);
+        parent::__construct($post_type, $titel, $tekst, $image, $image_type);
+        $this->gruppe = $gruppe;
+        $this->tilmeldte = [];
+        
         
     }
 
-    function display(){
-        if(parent::display() == true){
+    function display($opslags_id){
+        if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
+            parent::display($opslags_id);
+            
+            if(!in_array($_SESSION['username'], $this->tilmeldte)){
+                if(isset($_REQUEST["tilmeld"])){
+                    if($_REQUEST["tilmeld"]==$opslags_id){
+                        array_push($this->tilmeldte, $_SESSION['username']);
+                        $erstatning=$this;
+                        global $db;
+                        // php-objekt bliver omkodet til BLOB-element der kan indsættes i database.
+                        // BLOB er smart, fordi det kan indeholde billeder, hvilket betyder at man kan gemme billeder i databasen.
+                        $erstatning = serialize($erstatning);
+                        $erstatning = base64_encode($erstatning);
+            
+                        // Opdaterer opslag i databasen.
+                        $insertSQL = "UPDATE information SET opslag='$erstatning' WHERE id='$opslags_id'";
+                        $result = mysqli_query($db, $insertSQL);
+                        if(!$result){
+                            die("Couldn't query insert-statement");
+                        }
+                        header("Refresh:0");
+                    }
+                }
+
+                echo("<br>
+                <form action=\"\" method=\"POST\">
+                <button type=\"submit\" name=\"tilmeld\" value=\"{$opslags_id}\">Tilmeld</button>
+                </form>");
+            } else {
+                if(isset($_REQUEST["frameld"])){
+                    if($_REQUEST["frameld"]==$opslags_id){
+                        $key = array_search($_SESSION['username'], $this->tilmeldte);
+                        unset($this->tilmeldte[$key]);
+
+                        $erstatning=$this;
+                        global $db;
+                        // php-objekt bliver omkodet til BLOB-element der kan indsættes i database.
+                        // BLOB er smart, fordi det kan indeholde billeder, hvilket betyder at man kan gemme billeder i databasen.
+                        $erstatning = serialize($erstatning);
+                        $erstatning = base64_encode($erstatning);
+            
+                        // Opdaterer opslag i databasen.
+                        $updateSQL = "UPDATE information SET opslag='$erstatning' WHERE id='$opslags_id';";
+                        $result = mysqli_query($db, $updateSQL);
+                        if(!$result){
+                            die("Couldn't query update-statement");
+                        }
+                        header("Refresh:0");
+                    }
+                }
+                echo("<br>
+                <form action=\"\" method=\"POST\">
+                <button type=\"submit\" name=\"frameld\" value=\"{$opslags_id}\">Frameld</button>
+                </form>");
+            }
+                $i = 0;
+                $tilmeldteString = "";
+                foreach($this->tilmeldte as $navn){
+                    if($i != 0){
+                        $key = array_search($navn, $this->tilmeldte);
+                        $tilmeldteString.= ", " . $this->tilmeldte[$key];
+                    } else {
+                        $key = array_search($navn, $this->tilmeldte);
+                        $tilmeldteString .= $this->tilmeldte[$key];
+                    }
+                    $i++;
+                }
+                echo ("<p>{$tilmeldteString}</p>");
             return true;
         } else {
             return false;
-        }
-    }
-
-    function tilmeld(){
-        
+        } 
     }
 }
-
 ?>

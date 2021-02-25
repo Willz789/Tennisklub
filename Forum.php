@@ -30,7 +30,8 @@
         //find id'et på den nyeste post
         $sidst_opslag_id = mysqli_fetch_array($result)['id'];
         //sæt i lig med det nyeste id
-        $i=$sidst_opslag_id;
+        
+        $i = $sidst_opslag_id;
         /*kør et loop indtil der enten ikke er flere post at hente, eller indtil der bliver displayet maxOpslag.
         display() retunerer true hvis opslaget er gyldigt og bliver vist 
         og false hvsi brugeren ikke har ret til at interegere eller se opslaget*/
@@ -46,9 +47,10 @@
             $opslag = base64_decode($opslag);
             $opslag = unserialize($opslag);
             echo(" <div class=\"row\">");
-            if($opslag->display()==true){
+            if($opslag->display($i)==true){
                 
                 $opslag_vist++;
+                echo(" </div>");
             }
             echo(" </div>");
             $i = $i-1;
