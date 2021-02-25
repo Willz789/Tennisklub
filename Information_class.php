@@ -147,9 +147,10 @@ class Event extends Opslag {
         if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
             parent::display($opslags_id);
             
-            if(!in_array($_SESSION['username'], $this->tilmeldte)){
+            if(!in_array($_SESSION['username'], $this->tilmeldte)){ // Kan kun tilmeldes, hvis man ikke allerede er tilmeldt.
                 if(isset($_REQUEST["tilmeld"])){
                     if($_REQUEST["tilmeld"]==$opslags_id){
+                        // Tilføjer username til liste af tilmeldte
                         array_push($this->tilmeldte, $_SESSION['username']);
                         $erstatning=$this;
                         global $db;
@@ -164,10 +165,11 @@ class Event extends Opslag {
                         if(!$result){
                             die("Couldn't query insert-statement");
                         }
+                        // Refresher siden så knap ændres fra tilmeld til frameld.
                         header("Refresh:0");
                     }
                 }
-
+                // Knap der tilmelder til event.
                 echo("<br>
                 <form action=\"\" method=\"POST\">
                 <button type=\"submit\" name=\"tilmeld\" value=\"{$opslags_id}\">Tilmeld</button>
@@ -175,6 +177,7 @@ class Event extends Opslag {
             } else {
                 if(isset($_REQUEST["frameld"])){
                     if($_REQUEST["frameld"]==$opslags_id){
+                        // Fjerner username fra liste med tilmeldte
                         $key = array_search($_SESSION['username'], $this->tilmeldte);
                         unset($this->tilmeldte[$key]);
 
@@ -191,14 +194,17 @@ class Event extends Opslag {
                         if(!$result){
                             die("Couldn't query update-statement");
                         }
+                        // Refresher siden så knap ændres fra frameld til tilmeld.
                         header("Refresh:0");
                     }
                 }
+                // Knap der framelder en fra event
                 echo("<br>
                 <form action=\"\" method=\"POST\">
                 <button type=\"submit\" name=\"frameld\" value=\"{$opslags_id}\">Frameld</button>
                 </form>");
             }
+                // Echo'er en liste med alle de tilmeldte.
                 $i = 0;
                 $tilmeldteString = "";
                 foreach($this->tilmeldte as $navn){
