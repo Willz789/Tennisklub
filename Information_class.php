@@ -24,7 +24,6 @@ class Opslag {
     public $tekst;
     public $image;
     public $image_type;
-    public $gruppe;
     public $post_type;
 
     // Klassens constructor.
@@ -61,15 +60,16 @@ class Opslag {
                 echo '<img src="data:'.$this->image_type.';base64,'.base64_encode($imagedata).'">';
                 }
 
-
+                //output dato
                 echo("<p> Dato:{$this->dato}</p>");
 
-            //echo(" </div>");
+            
             
     }
 }
 
 class Information extends Opslag {
+    public $gruppe;
 
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
         parent::__construct($post_type, $titel, $tekst, $image, $image_type);
@@ -132,7 +132,7 @@ class Turnering extends Opslag{
 }
 
 class Event extends Opslag {
-
+    public $gruppe;
     public $tilmeldte;
 
     function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
@@ -205,7 +205,7 @@ class Event extends Opslag {
                 <button type=\"submit\" name=\"frameld\" value=\"{$opslags_id}\">Frameld</button>
                 </form>");
             
-        }
+            }
     }
     // Skriver på siden en liste med alle de tilmeldte.
         $i = 0;
@@ -220,7 +220,7 @@ class Event extends Opslag {
                 }
                     $i++;
         }
-        echo ("<p>{$tilmeldteString}</p>");
+        echo ("<p>Tilmeldte:{$tilmeldteString}</p>");
             return true;
         } else {
             return false;
