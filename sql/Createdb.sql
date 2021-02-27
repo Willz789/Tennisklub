@@ -79,7 +79,7 @@ INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, 
     'Lucas Sylvester',
     '10',
     '2',
-    '23/03/2002'
+    '24/01/2002'
 );
 INSERT INTO `users`(`username`, `password_hash`, `phonenumber`, `mail`, `name`, `ranking_points`, `role`, `birthday`) VALUES (
     'Asger',

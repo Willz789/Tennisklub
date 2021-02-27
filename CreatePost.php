@@ -109,7 +109,7 @@
                 <option value="0">Members</option>
                 <option value="1">Coaches</option>
                 <option value="2">Administration</option>
-                <option value="-1" class="informations_opslag" >Everyone</option>
+                <option value="-1">Everyone</option>
             </select>
             <br>
             <br>

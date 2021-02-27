@@ -144,9 +144,10 @@ class Event extends Opslag {
     }
 
     function display($opslags_id){
-        if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
+    if($this->gruppe == -1 || (isset($_SESSION['user_id']) && $_SESSION['role'] >= $this->gruppe)){
             parent::display($opslags_id);
-            
+        //Hvis kun tildmeldingsknappen, hvis personen er logget ind
+        if(isset($_SESSION['username'])){
             if(!in_array($_SESSION['username'], $this->tilmeldte)){ // Kan kun tilmeldes, hvis man ikke allerede er tilmeldt.
                 if(isset($_REQUEST["tilmeld"])){
                     if($_REQUEST["tilmeld"]==$opslags_id){
@@ -204,20 +205,22 @@ class Event extends Opslag {
                 <button type=\"submit\" name=\"frameld\" value=\"{$opslags_id}\">Frameld</button>
                 </form>");
             }
-                // Echo'er en liste med alle de tilmeldte.
-                $i = 0;
-                $tilmeldteString = "";
-                foreach($this->tilmeldte as $navn){
-                    if($i != 0){
-                        $key = array_search($navn, $this->tilmeldte);
-                        $tilmeldteString.= ", " . $this->tilmeldte[$key];
-                    } else {
-                        $key = array_search($navn, $this->tilmeldte);
-                        $tilmeldteString .= $this->tilmeldte[$key];
-                    }
-                    $i++;
+        }
+    }
+    // Skriver på siden en liste med alle de tilmeldte.
+        $i = 0;
+        $tilmeldteString = "";
+        foreach($this->tilmeldte as $navn){
+            if($i != 0){
+                $key = array_search($navn, $this->tilmeldte);
+                $tilmeldteString.= ", " . $this->tilmeldte[$key];
+                } else {
+                $key = array_search($navn, $this->tilmeldte);
+                $tilmeldteString .= $this->tilmeldte[$key];
                 }
-                echo ("<p>{$tilmeldteString}</p>");
+                    $i++;
+        }
+        echo ("<p>{$tilmeldteString}</p>");
             return true;
         } else {
             return false;
