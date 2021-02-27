@@ -23,7 +23,7 @@
 
             list($width, $height, $image_type) = getimagesize($file); // Skaber variabler med størrelsen og typen af billedet
 
-            // Skaber sourcen til billedet.
+            // Skaber et manipulerbart billeder object afhængigt af billed typen.
             switch ($image_type)
             {
                 case 1: $src = imagecreatefromgif($file); break;
@@ -50,14 +50,17 @@
             //lav et nyt blank billede i den skalerede størrelse
             $tmp = imagecreatetruecolor($tn_width,$tn_height);
 
-            //Check om billede er gif eller png, og set transperens hvis det er tilfældet.
+            //Check om billede er gif eller png, og set baggrunder til hvid hvis det er tilfældet
             if(($image_type == 1) OR ($image_type==3))
             {
-                imagealphablending($tmp, false);
-                imagesavealpha($tmp,true);
-                $transparent = imagecolorallocatealpha($tmp, 255, 255, 255, 127);
-                imagefilledrectangle($tmp, 0, 0, $tn_width, $tn_height, $transparent);
+            //lav et nyt blank (sort) billede i den skalerede størrelse
+            $tmp = imagecreatetruecolor($tn_width,$tn_height);
+            //opret hvid baggrunds farve ud fra RGB
+            $white  = imagecolorallocate($tmp,255,255,255);
+            //udfyld det tomme billeder med hvid, fra koordinat 0,0 af billedet altså hele billedet udfyldes.
+            imagefill($tmp, 0, 0, $white);
             }
+            //kopier original billedet skalaret ind i det blanke billede;
             imagecopyresampled($tmp,$src,0,0,0,0,$tn_width, $tn_height,$width,$height);
 
             ob_start();

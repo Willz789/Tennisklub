@@ -204,7 +204,7 @@ class Event extends Opslag {
                 <form action=\"\" method=\"POST\">
                 <button type=\"submit\" name=\"frameld\" value=\"{$opslags_id}\">Frameld</button>
                 </form>");
-            }
+            
         }
     }
     // Skriver på siden en liste med alle de tilmeldte.
