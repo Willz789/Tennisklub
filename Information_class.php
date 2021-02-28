@@ -165,7 +165,7 @@ class Event extends Opslag {
                             die("Couldn't query insert-statement");
                         }
                         // Refresher siden så knap ændres fra tilmeld til frameld.
-                        header("Refresh:0");
+                        echo '<script type="text/javascript">location.reload(true);</script>';
                     }
                 }
                 // Knap der tilmelder til event.
@@ -194,7 +194,7 @@ class Event extends Opslag {
                             die("Couldn't query update-statement");
                         }
                         // Refresher siden så knap ændres fra frameld til tilmeld.
-                        header("Refresh:0");
+                        echo '<script type="text/javascript">location.reload(true);</script>';
                     }
                 }
                 // Knap der framelder en fra event
