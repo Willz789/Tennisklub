@@ -41,7 +41,8 @@ $(document).ready(function(){
                     mail: mail,
                     birthday: birthDate
                 },
-                success: function(response) { // Kører følgende funktion efter php-script er kørt, og tager respons fra php-script
+                // Kører følgende funktion efter php-script er kørt, og tager respons fra php-script
+                success: function(response) { 
                     json = JSON.parse(response);
 
                     switch(json.result){

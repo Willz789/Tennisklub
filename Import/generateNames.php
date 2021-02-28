@@ -20,7 +20,9 @@
 
     function generateFromAPI($url){
         $response = file_get_contents($url); // Henter data fra api.
-        if(!$response){ // Giver fejl, hvis den ikke kunne hente data. (Med vores abbonement på api-siden, kan api'en kun bruges en bestemt mængde gange om dagen.)
+        /* Giver fejl, hvis den ikke kunne hente data. (Med vores abbonement på api-siden, 
+        kan api'en kun bruges en bestemt mængde gange om dagen.) */
+        if(!$response){ 
             die("couldn't access api-call (Perhaps you reached the limit)");
         }
         $response = json_decode($response); // Omdanner data til JSON-format.
@@ -28,10 +30,10 @@
     }
 
     // Indsætter nye brugere i databasen.
-    function insertUsers($apiReponse){
+    function insertUsers($apiResponse){
         global $db;
         
-        foreach($apiReponse->data as $character){// For hver person i databasen.
+        foreach($apiResponse->data as $character){// For hver person i databasen.
             // Henter data fra api'en.
             $firstname = $character->name->firstname->name; 
             $lastname = $character->name->lastname->name;
