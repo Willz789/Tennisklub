@@ -12,9 +12,6 @@
                 <a class="navbar-link" href="./Training.php">Training</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-link" href='./Booking.php'>Booking</a>
-            </li>
-            <li class="nav-item">
                 <a class="navbar-link" href="./Forum.php">Forum</a>
             </li>
             <?php
@@ -28,18 +25,21 @@
                 </li>
                 <?php
             } else { // De næste er kun vist, hvis man er logget ind.
-                ?>
+                if(($_SESSION['role']) != 0){ // Disse elementer er kun vist, hvis man enten er træner eller admin.
+                    ?>
+                    <li class="nav-item">
+                        <a class="navbar-link" href='./CreatePost.php'>Create post</a>
+                    </li>
+                <?php } ?>
+
                 <li class="nav-item" style="float:right">
                     <a class="navbar-link" href='account/logout.php'>Log out</a>
                 </li>
-                <?php
-                if(($_SESSION['role']) != 0){ // Disse elementer er kun vist, hvis man enten er træner eller admin.
-                    ?>
                 <li class="nav-item">
-                    <a class="navbar-link" href='./CreatePost.php'>Create post</a>
+                    <a class="navbar-link" href='./Booking.php'>Booking</a>
                 </li>
+                
                 <?php
-                }
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 2){ // Man skal kun kunne tildele roller på hjemmesiden, hvis man er admin.
                         ?>
