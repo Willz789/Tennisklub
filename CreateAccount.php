@@ -32,9 +32,10 @@
 			<input type="number" id="birthYear" placeholder = "year" required>
 		</div>
 		<button type="submit" id="submit" class="button-signup">Sign up</button> <!-- submit-knap der kører javascriptet -->
+		<p id="msg" style="color: red"></p> <!-- Div til eventuel fejlbesked til brugeren. -->
 	</div>
 
-	<p id="msg" style="color: red"></p> <!-- Div til eventuel fejlbesked til brugeren. -->
+	
 </main>
 
 </body>

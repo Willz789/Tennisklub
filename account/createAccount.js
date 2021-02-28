@@ -14,7 +14,7 @@ $(document).ready(function(){
 
         // Tjekker at password er lig med confirm-password fra input.
         if(password != confirm_password){
-            $("#msg").html("passwords must match."); // Fejlbesked til bruger
+            $("#msg").html("Passwords must match!"); // Fejlbesked til bruger
         } else if (username.length >= 4 && password.length >= 4 && birthDay>0 && birthMonth>0){ // Krav til credentials.
             
             // Tilføjer "0" foran dag og måned, hvis de kun indeholder ét ciffer.
