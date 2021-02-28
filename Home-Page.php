@@ -18,38 +18,46 @@
         ?>
         <!-- Liste med medlemmer i klubben -->
         <div class="members" style="border: 2px solid black">
-            <h1 class="titel">Members</h1>
-            <ul class="member-list">
-                <?php
-                // Vælger alle brugere i databasen.
-                $selectSQL = "SELECT * FROM `users`;";
-                $result = mysqli_query($db, $selectSQL);
-                if(!$result){
-                    die("Couldn't select users");
-                }
-                while($row = mysqli_fetch_assoc($result)){
-                    extract($row); // Skaber variablerne fra rækken i databasen.
-                    $role = generateRole($row['role']); // Funktion der omdanner rolle fra tal til String
-                    ?>
-                    <!-- Liste med informationer om hver bruger, fx kontaktinformationer, som vises når musen holdes over navnet. -->
-                    <li class="member-row"><?php echo $row['name']; ?>
-                        <div class="member-info">
-                            <p class="titel" style="font-size:medium"><?php echo $row['name']; ?></p>
-                            <p class="tekst"><?php echo "Phonenumber: $phonenumber" ?></p>
-                            <p class="tekst"><?php echo "Mail: $mail" ?></p>
-                            <p class="tekst"><?php echo "Role: $role" ?></p>
-                            <p class="tekst"><?php echo "Ranked Points: $ranking_points" ?></p>
-                            <p class="tekst"><?php echo "Birthday: $birthday" ?></p>
-                        </div>
-                    </li>
-                    <?php
-                }
+            <?php
+            if(isset($_SESSION['user_id'])){
                 ?>
-            </ul>
-            <?php 
-            // Hvis man er admin, så er der et import-link som autogenerere nogle brugere til databasen.
-            if(isset($_SESSION['user_id']) && $_SESSION['role'] == 2){
-                echo("<a href=\"./Import.php\">Import Users</a>");
+                <h1 class="titel">Members</h1>
+                <ul class="member-list">
+                    <?php
+                    // Vælger alle brugere i databasen.
+                    $selectSQL = "SELECT * FROM `users`;";
+                    $result = mysqli_query($db, $selectSQL);
+                    if(!$result){
+                        die("Couldn't select users");
+                    }
+                    while($row = mysqli_fetch_assoc($result)){
+                        extract($row); // Skaber variablerne fra rækken i databasen.
+                        $role = generateRole($row['role']); // Funktion der omdanner rolle fra tal til String
+                        ?>
+                        <!-- Liste med informationer om hver bruger, fx kontaktinformationer, som vises når musen holdes over navnet. -->
+                        <li class="member-row"><?php echo $row['name']; ?>
+                            <div class="member-info">
+                                <p class="titel" style="font-size:medium"><?php echo $row['name']; ?></p>
+                                <p class="tekst"><?php echo "Phonenumber: $phonenumber" ?></p>
+                                <p class="tekst"><?php echo "Mail: $mail" ?></p>
+                                <p class="tekst"><?php echo "Role: $role" ?></p>
+                                <p class="tekst"><?php echo "Ranked Points: $ranking_points" ?></p>
+                                <p class="tekst"><?php echo "Birthday: $birthday" ?></p>
+                            </div>
+                        </li>
+                        <?php
+                    }
+                    ?>
+                </ul>
+                <?php 
+                // Hvis man er admin, så er der et import-link som autogenerere nogle brugere til databasen.
+                if($_SESSION['role'] == 2){
+                    echo("<a href=\"./Import.php\">Import Users</a>");
+                }
+            } else {
+                ?>
+                <p class="tekst">Sign in to see list of members</p>
+                <?php
             }
             ?>
         </div>
