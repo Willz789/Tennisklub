@@ -24,15 +24,13 @@ class Opslag {
     public $tekst;
     public $image;
     public $image_type;
-    public $post_type;
 
     // Klassens constructor.
-    function __construct($post_type, $titel, $tekst, $image, $image_type) {
+    function __construct($titel, $tekst, $image, $image_type) {
         $this->titel = $titel;
         $this->tekst = $tekst;
         $this->image = $image;
         $this->image_type = $image_type;
-        $this->post_type = $post_type;
         //$this->tilføjelse = null;
         $this->dato = date('d/m/Y');
         
@@ -71,8 +69,8 @@ class Opslag {
 class Information extends Opslag {
     public $gruppe;
 
-    function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type);
+    function __construct($titel, $tekst, $image, $image_type, $gruppe){
+        parent::__construct($titel, $tekst, $image, $image_type);
         $this->gruppe = $gruppe;
     }
 
@@ -93,9 +91,9 @@ class Turnering extends Opslag{
     public $min_alder; // Nye variabler som kun gælder for turneringer.
     public $max_alder;
 
-    function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe, $min_alder, $max_alder){
+    function __construct($titel, $tekst, $image, $image_type, $gruppe, $min_alder, $max_alder){
         //passerer de normale argumenter videre til basis konstruktøren
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type, $gruppe); // Kører parent-constructor
+        parent::__construct($titel, $tekst, $image, $image_type, $gruppe); // Kører parent-constructor
         $this->min_alder = $min_alder;
         $this->max_alder = $max_alder;
     }
@@ -135,8 +133,8 @@ class Event extends Opslag {
     public $gruppe;
     public $tilmeldte;
 
-    function __construct($post_type, $titel, $tekst, $image, $image_type, $gruppe){
-        parent::__construct($post_type, $titel, $tekst, $image, $image_type);
+    function __construct($titel, $tekst, $image, $image_type, $gruppe){
+        parent::__construct($titel, $tekst, $image, $image_type);
         $this->gruppe = $gruppe;
         $this->tilmeldte = [];
         

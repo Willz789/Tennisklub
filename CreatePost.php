@@ -189,17 +189,14 @@
                 // "Event" og "Turnering" er subklasser til "Information.
                 switch ($opslags_type){
                     case "Generel information":
-                        $post_type = 0;
-                        $nyt_opslag = new Information($post_type, $titel, $tekst, $img, $image_type, $gruppe);
+                        $nyt_opslag = new Information($titel, $tekst, $img, $image_type, $gruppe);
                         break;
                     case "Event":
-                        $post_type = 1;
-                        $nyt_opslag = new Event($post_type, $titel, $tekst, $img, $image_type, $gruppe);
+                        $nyt_opslag = new Event($titel, $tekst, $img, $image_type, $gruppe);
                         break;
                     case "Turnering":
-                        $post_type = 2;
                         $gruppe = -1;
-                        $nyt_opslag = new Turnering($post_type, $titel, $tekst, $img, $image_type, $gruppe, $min_alder, $max_alder);
+                        $nyt_opslag = new Turnering($titel, $tekst, $img, $image_type, $gruppe, $min_alder, $max_alder);
                         break;
                 }
                 gem_opslag($nyt_opslag); // Funktion i scriptet "Information_class.php" som gemmer objekt i database som BLOB.
